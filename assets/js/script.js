@@ -39,8 +39,8 @@
     { miles: 1120, name: "Fort Bridger", shortName: "Fort Bridger", state: "WY", coordinates: [-110.3888, 41.3172], description: "A key supply stop in the Green River valley." },
     { miles: 1300, name: "Fort Hall", shortName: "Fort Hall", state: "ID", coordinates: [-112.4383, 43.0324], description: "A Hudson's Bay Company post near the Snake River in present-day Idaho." },
     { miles: 1830, name: "Blue Mountains", shortName: "Blue Mountains", state: "OR", coordinates: [-118, 45.3], description: "A challenging mountain crossing on the final approach to the Columbia River." },
-    { miles: 1950, name: "The Dalles", shortName: "The Dalles", state: "OR", coordinates: [-121.1787, 45.5946], description: "A Columbia River passage and key stopping point before the final leg." },
-    { miles: TRAIL_MILES, name: "Oregon City, Oregon", shortName: "Oregon City", state: "OR", coordinates: [-122.6068, 45.3573], description: "The traditional destination of the Oregon Trail in the Willamette Valley." }
+    { miles: 1950, name: "The Dalles", shortName: "The Dalles", state: "OR", coordinates: [-121.1787, 45.5946], markerOffset: [10, -12], description: "A Columbia River passage and key stopping point before the final leg." },
+    { miles: TRAIL_MILES, name: "Oregon City, Oregon", shortName: "Oregon City", state: "OR", coordinates: [-122.6068, 45.3573], markerOffset: [-2, 14], description: "The traditional destination of the Oregon Trail in the Willamette Valley." }
   ];
 
   function localDateString(date) {
@@ -512,7 +512,59 @@
     return { x: a.x + (b.x - a.x) * portion, y: a.y + (b.y - a.y) * portion };
   }
 
+  // Hand-placed (lon, lat) scenery so rivers and ranges sit where they really are on the projected map.
+  const MAP_RIVERS = [
+    { name: "Missouri", label: [-98.6, 43.35], points: [[-100.3, 44.4], [-98.5, 42.9], [-96.9, 42.5], [-96.0, 41.2], [-95.8, 40.2], [-94.6, 39.1], [-92.5, 38.95], [-90.2, 38.8]] },
+    { name: "Mississippi", label: [-91.0, 36.0], points: [[-93.2, 44.9], [-91.2, 43.0], [-90.2, 41.5], [-91.4, 40.2], [-90.2, 38.8], [-90.1, 37.0], [-89.5, 36.0], [-90.5, 34.5], [-91.2, 33.0], [-91.6, 31.0], [-89.4, 29.1]] },
+    { name: "Platte", points: [[-104.8, 42.1], [-103.7, 41.9], [-102.0, 41.2], [-100.8, 41.1], [-99.6, 40.75], [-98.0, 40.8], [-96.5, 41.05], [-95.9, 41.05]] },
+    { name: "Snake", points: [[-110.6, 43.8], [-111.5, 43.5], [-112.4, 43.0], [-113.5, 42.6], [-115.0, 42.8], [-116.4, 43.7], [-116.9, 44.3], [-117.0, 45.0], [-116.6, 45.8], [-117.0, 46.4], [-119.0, 46.2]] },
+    { name: "Columbia", points: [[-119.0, 46.2], [-119.4, 45.95], [-120.5, 45.7], [-121.2, 45.6], [-122.0, 45.6], [-122.8, 45.65], [-123.8, 46.2]] }
+  ];
+  const MAP_RANGES = [
+    { name: "Rocky Mountains", label: [-107.2, 39.2], peaks: [[-112.5, 47.5], [-110.8, 46.0], [-110.3, 44.2], [-107.5, 41.0], [-106.4, 39.9], [-105.9, 38.2], [-106.0, 36.2]] },
+    { name: "Cascades", label: [-119.6, 48.2], peaks: [[-121.6, 48.4], [-121.6, 46.8], [-121.8, 45.0], [-122.1, 43.5], [-122.2, 41.8]] },
+    { name: "Sierra Nevada", label: [-121.4, 37.3], peaks: [[-120.3, 40.0], [-119.9, 38.7], [-118.9, 37.2], [-118.3, 36.0]] },
+    { name: "Appalachians", label: [-80.4, 33.9], peaks: [[-78.4, 40.8], [-79.8, 39.0], [-81.4, 37.6], [-82.6, 36.2], [-83.6, 35.2]] }
+  ];
+  const MAP_WATERS = [
+    { name: "PACIFIC", at: [-125.7, 44.2] },
+    { name: "ATLANTIC OCEAN", at: [-71.5, 35.5] },
+    { name: "GULF OF MEXICO", at: [-90.5, 27.6] },
+    { name: "GREAT PLAINS", at: [-100.5, 37.3] }
+  ];
+
+  function renderFeatures(svg) {
+    const layer = svg.querySelector("[data-map-features]");
+    if (!layer) return;
+    layer.replaceChildren();
+    const at = (coords) => projectMapPoint(coords);
+    const text = (className, coords, content, dx, dy) => {
+      const point = at(coords);
+      const element = createSvgElement("text", { class: className, x: point.x + (dx || 0), y: point.y + (dy || 0) });
+      element.textContent = content;
+      layer.append(element);
+    };
+    MAP_RIVERS.forEach((river) => {
+      const d = river.points.map((coords, i) => {
+        const point = at(coords);
+        return `${i ? "L" : "M"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`;
+      }).join(" ");
+      layer.append(createSvgElement("path", { class: "map-river", d }));
+      if (river.label) text("map-feature-label map-river-label", river.label, river.name);
+    });
+    MAP_RANGES.forEach((range) => {
+      range.peaks.forEach((coords) => {
+        const point = at(coords);
+        layer.append(createSvgElement("path", { class: "map-peak", d: `M${point.x - 7} ${point.y + 4}L${point.x} ${point.y - 7}L${point.x + 7} ${point.y + 4}Z` }));
+        layer.append(createSvgElement("path", { class: "map-peak-cap", d: `M${point.x - 2.4} ${point.y - 2}L${point.x} ${point.y - 7}L${point.x + 2.4} ${point.y - 2}Z` }));
+      });
+      text("map-feature-label map-range-label", range.label, range.name.toUpperCase());
+    });
+    MAP_WATERS.forEach((water) => text("map-feature-label map-water-label", water.at, water.name));
+  }
+
   function renderRoute(svg, progressMiles) {
+    renderFeatures(svg);
     const remainingLayer = svg.querySelector("[data-route-remaining]");
     const completedLayer = svg.querySelector("[data-route-completed]");
     const stopLayer = svg.querySelector("[data-route-stops]");

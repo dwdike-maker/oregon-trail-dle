@@ -46,8 +46,7 @@
           <title id="progress-map-title">Interactive Oregon Trail map across the United States</title>
           <desc id="progress-map-desc">A geographically projected map of the contiguous United States with the Oregon Trail from Independence, Missouri, to Oregon City, Oregon. Select a numbered landmark for details.</desc>
           <use class="map-base" href="../assets/images/us-states.svg#state-boundaries"></use>
-          <image class="map-hillshade" href="../assets/images/usgs-shaded-relief.png" x="68" y="12" width="864" height="546" aria-hidden="true"></image>
-          <use class="map-terrain" href="../assets/images/us-relief.svg#terrain-contours"></use>
+          <g data-map-features aria-hidden="true"></g>
           <g data-route-remaining aria-hidden="true"></g>
           <g data-route-completed aria-hidden="true"></g>
           <g data-route-stops></g>
@@ -56,7 +55,7 @@
       <div class="map-legend" aria-label="Map legend">
         <span><i class="legend-line legend-completed"></i> Traveled</span>
         <span><i class="legend-line legend-remaining"></i> Ahead on the trail</span>
-        <span><i class="legend-relief"></i> Terrain relief</span>
+        <span><i class="legend-relief"></i> Rivers &amp; mountains</span>
         <span>
           <svg class="legend-wagon" viewBox="0 0 36 28" aria-hidden="true">
             <path class="legend-wagon-cover" d="M7 16C5 12 6 6 11 5C17 3 24 5 26 9L28 16Z"></path>
@@ -85,7 +84,7 @@
         <span data-landmark-distance>Select a numbered marker or waypoint to explore the route.</span>
       </div>
       <div class="landmark-list" data-landmark-list aria-label="Oregon Trail landmarks"></div>
-      <p class="map-disclaimer">State boundaries use Census-derived geography. Terrain shading: <a href="https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer">USGS National Map</a>; extra contour lines are illustrative. Trail mileage is approximate.</p>
+      <p class="map-disclaimer">State boundaries use Census-derived geography. Rivers and mountain ranges are hand-placed and approximate, as is the trail mileage.</p>
       </div>
     </section>
 

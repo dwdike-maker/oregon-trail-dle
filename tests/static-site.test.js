@@ -35,10 +35,13 @@ test("pages have no collaborative wording or elements", async () => {
   }
 });
 
-test("pages keep the map, hunt, and illustrative terrain", async () => {
+test("pages keep the map, hunt, and hand-placed scenery", async () => {
   const [home, progress] = await Promise.all([read("index.html"), read("pages/progress.html")]);
   assert.match(home, /data-next-hunt/);
-  assert.match(home, /us-relief\.svg#terrain-contours/);
-  assert.match(progress, /us-relief\.svg#terrain-contours/);
-  assert.match(await read("README.md"), /not measured elevation data/);
+  for (const page of [home, progress]) {
+    assert.match(page, /data-map-features/);
+    assert.match(page, /us-states\.svg#state-boundaries/);
+    assert.doesNotMatch(page, /hillshade|us-relief|usgs/i);
+  }
+  assert.match(await read("README.md"), /hand-placed/);
 });
