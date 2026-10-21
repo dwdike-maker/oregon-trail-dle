@@ -507,6 +507,20 @@ a {
   pointer-events: none;
 }
 
+.state-shapes {
+  fill: #ecd9a6;
+  stroke: #8a7048;
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+.state-labels {
+  fill: #7a6440;
+  font: 700 8.5px "Courier New", monospace;
+  text-anchor: middle;
+  opacity: .75;
+}
+
 .map-feature-label {
   pointer-events: none;
   text-anchor: middle;

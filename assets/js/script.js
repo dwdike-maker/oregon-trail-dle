@@ -533,7 +533,15 @@
     { name: "GREAT PLAINS", at: [-100.5, 37.3] }
   ];
 
+  function renderStates(svg) {
+    const base = svg.querySelector("[data-map-base]");
+    if (!base || base.childElementCount || !window.OTDLE_STATES) return;
+    const doc = new DOMParser().parseFromString(`<svg xmlns="http://www.w3.org/2000/svg">${window.OTDLE_STATES}</svg>`, "image/svg+xml");
+    Array.from(doc.documentElement.childNodes).forEach((node) => base.append(document.importNode(node, true)));
+  }
+
   function renderFeatures(svg) {
+    renderStates(svg);
     const layer = svg.querySelector("[data-map-features]");
     if (!layer) return;
     layer.replaceChildren();

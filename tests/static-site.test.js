@@ -40,7 +40,8 @@ test("pages keep the map, hunt, and hand-placed scenery", async () => {
   assert.match(home, /data-next-hunt/);
   for (const page of [home, progress]) {
     assert.match(page, /data-map-features/);
-    assert.match(page, /us-states\.svg#state-boundaries/);
+    assert.match(page, /data-map-base/);
+    assert.match(page, /us-states\.js/);
     assert.doesNotMatch(page, /hillshade|us-relief|usgs/i);
   }
   assert.match(await read("README.md"), /hand-placed/);

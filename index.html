@@ -7,6 +7,7 @@
   <meta name="description" content="Track your miles as you make your way west along the Oregon Trail.">
   <title>Oregon Trail DLE | Your journey west</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/us-states.js" defer></script>
   <script src="assets/js/script.js" defer></script>
 </head>
 <body data-page="home">
@@ -45,7 +46,7 @@
           <svg class="trail-svg us-map" viewBox="0 0 1000 570" role="group" aria-labelledby="home-map-title home-map-desc">
             <title id="home-map-title">Interactive Oregon Trail map across the United States</title>
             <desc id="home-map-desc">A geographically projected map of the contiguous United States with the Oregon Trail from Independence, Missouri, to Oregon City, Oregon. Select a numbered landmark for details.</desc>
-            <use class="map-base" href="assets/images/us-states.svg#state-boundaries"></use>
+            <g class="map-base" data-map-base aria-hidden="true"></g>
             <g data-map-features aria-hidden="true"></g>
             <g data-route-remaining aria-hidden="true"></g>
             <g data-route-completed aria-hidden="true"></g>
