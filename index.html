@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e7">
+  <meta name="description" content="Track your miles as you make your way west along the Oregon Trail.">
+  <title>Oregon Trail DLE | Your journey west</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/script.js" defer></script>
+</head>
+<body data-page="home">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Oregon Trail DLE home">
+      <span class="brand-mark" aria-hidden="true">OT</span>
+      <span>Oregon Trail <span class="brand-light">DLE</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="nav-link is-active" href="index.html" aria-current="page">Home</a>
+      <a class="nav-link" href="pages/log-mileage.html">Log miles</a>
+      <a class="nav-link" href="pages/progress.html">Progress</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <div class="notice" data-storage-status role="alert" hidden></div>
+    <section class="map-hero-head" aria-labelledby="journey-heading">
+      <div>
+        <p class="eyebrow">Oregon Trail · 1843</p>
+        <h1 id="journey-heading">Current journey</h1>
+        <p>Every mile you move brings your wagon closer to Oregon City.</p>
+      </div>
+      <a class="button button-primary" href="pages/log-mileage.html">Log today's miles <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section class="trail-card map-hero-card" aria-labelledby="map-heading">
+        <div class="trail-card-heading">
+          <div>
+            <p class="eyebrow">Missouri to Oregon</p>
+            <h2 id="map-heading">The Oregon Trail</h2>
+          </div>
+          <span class="distance-chip">Follow your wagon west</span>
+        </div>
+        <div class="trail-map" data-trail-map>
+          <svg class="trail-svg us-map" viewBox="0 0 1000 570" role="group" aria-labelledby="home-map-title home-map-desc">
+            <title id="home-map-title">Interactive Oregon Trail map across the United States</title>
+            <desc id="home-map-desc">A geographically projected map of the contiguous United States with the Oregon Trail from Independence, Missouri, to Oregon City, Oregon. Select a numbered landmark for details.</desc>
+            <use class="map-base" href="assets/images/us-states.svg#state-boundaries"></use>
+            <image class="map-hillshade" href="assets/images/usgs-shaded-relief.png" x="68" y="12" width="864" height="546" aria-hidden="true"></image>
+            <use class="map-terrain" href="assets/images/us-relief.svg#terrain-contours"></use>
+            <g data-route-remaining aria-hidden="true"></g>
+            <g data-route-completed aria-hidden="true"></g>
+            <g data-route-stops></g>
+            <g data-wagon-layer aria-hidden="true"></g>
+          </svg>
+        </div>
+        <div class="map-legend" aria-label="Map legend">
+          <span><i class="legend-line legend-completed"></i> Traveled</span>
+          <span><i class="legend-line legend-remaining"></i> Ahead on the trail</span>
+          <span><i class="legend-relief"></i> Terrain relief</span>
+          <span>
+            <svg class="legend-wagon" viewBox="0 0 36 28" aria-hidden="true">
+              <path class="legend-wagon-cover" d="M7 16C5 12 6 6 11 5C17 3 24 5 26 9L28 16Z"></path>
+              <path class="legend-wagon-bed" d="M4 15H29L32 19H3Z"></path>
+              <circle class="legend-wagon-wheel" cx="9" cy="22" r="4"></circle>
+              <circle class="legend-wagon-wheel" cx="26" cy="22" r="4"></circle>
+            </svg>
+            Your wagon
+          </span>
+        </div>
+        <div class="fitness-progress">
+          <div><span>Fitness progress</span><strong><span data-total-miles>0</span> of 2,040 miles</strong></div>
+          <strong class="fitness-percent" data-progress-label>0% complete</strong>
+          <div class="progress-track" role="progressbar" aria-label="Oregon Trail distance completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
+            <span class="progress-fill" data-progress-fill></span>
+          </div>
+        </div>
+        <div class="map-readout">
+          <div><span>Current location</span><strong data-map-current>Independence, Missouri</strong></div>
+          <div><span>Next landmark</span><strong data-next-landmark>Fort Kearny</strong><small data-next-distance>300 miles ahead</small></div>
+          <div><span>Distance to Oregon City</span><strong><span data-distance-remaining>2,040</span> miles</strong></div>
+        </div>
+        <div class="landmark-detail" data-landmark-detail aria-live="polite">
+          <strong data-landmark-name>Independence, Missouri</strong>
+          <span data-landmark-mileage>Trailhead · mile 0</span>
+          <span data-landmark-distance>Select a numbered marker or waypoint to explore the route.</span>
+        </div>
+        <div class="landmark-list" data-landmark-list aria-label="Oregon Trail landmarks"></div>
+        <p class="map-disclaimer">State boundaries use Census-derived geography. Terrain shading: <a href="https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer">USGS National Map</a>; extra contour lines are illustrative. Trail mileage is approximate.</p>
+    </section>
+
+    <section class="section-block journey-summary" aria-labelledby="summary-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">On the trail</p>
+          <h2 id="summary-heading">Journey summary</h2>
+        </div>
+        <a class="text-link" href="pages/progress.html">View full journal <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <span class="stat-label">Miles traveled</span>
+          <strong class="stat-value" data-group-miles>0</strong>
+          <span class="stat-foot">saved on this device</span>
+        </article>
+        <article class="stat-card stat-card-location">
+          <span class="stat-label">Average per travel day</span>
+          <strong class="stat-value" data-avg-pace>0</strong>
+          <span class="stat-foot">miles on days you logged</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Distance to Oregon City</span>
+          <strong class="stat-value"><span data-distance-remaining>2,040</span></strong>
+          <span class="stat-foot">based on your mileage</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block camp-section" aria-labelledby="camp-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Optional trail diversion</p>
+          <h2 id="camp-heading">Hunt for camp</h2>
+        </div>
+        <span class="distance-chip">A little frontier flavor</span>
+      </div>
+      <div class="camp-card">
+        <div class="camp-supplies" aria-live="polite">
+          <div><span>Food stores</span><strong><span data-camp-food>0</span> lb</strong></div>
+          <div><span>Searches ready</span><strong data-hunts-remaining>0</strong></div>
+          <div><span>Hunts won</span><strong data-hunts-won>0 / 0</strong></div>
+          <div><span>Win streak</span><strong data-hunt-streak>0</strong></div>
+        </div>
+        <p class="camp-intro">A critter is hiding nearby. Pick one place to search. Every 5 miles you log earns a hunt, and the food you win is added to your stores.</p>
+        <p class="hunt-opportunity-note" data-hunt-opportunity-note></p>
+        <div class="hunt-scene" aria-label="Choose one of three places where the animal may be hiding">
+          <button class="hunt-location" type="button" data-hunt-location="tree" disabled>
+            <span class="hunt-landscape" aria-hidden="true"><span class="hunt-ground"></span><span class="hunt-illustration" data-location-illustration>🌲</span></span>
+            <strong>Old pine</strong>
+            <small data-location-reveal>Look here</small>
+          </button>
+          <button class="hunt-location" type="button" data-hunt-location="bush" disabled>
+            <span class="hunt-landscape" aria-hidden="true"><span class="hunt-ground"></span><span class="hunt-illustration" data-location-illustration>🌿</span></span>
+            <strong>Sagebrush</strong>
+            <small data-location-reveal>Look here</small>
+          </button>
+          <button class="hunt-location" type="button" data-hunt-location="log" disabled>
+            <span class="hunt-landscape" aria-hidden="true"><span class="hunt-ground"></span><span class="hunt-illustration" data-location-illustration>🪵</span></span>
+            <strong>Fallen log</strong>
+            <small data-location-reveal>Look here</small>
+          </button>
+        </div>
+        <div class="hunt-footer">
+          <p class="hunt-message" data-hunt-message role="status" aria-live="polite">Log miles to unlock the first search.</p>
+          <button class="button button-secondary next-hunt-button" type="button" data-next-hunt hidden disabled>Search again</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block recent-section" aria-labelledby="recent-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Your field journal</p>
+          <h2 id="recent-heading">Recent entries</h2>
+        </div>
+        <a class="text-link" href="pages/progress.html">View history <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="entry-list entry-list-compact" data-recent-entries>
+        <p class="empty-state">Your first entry is waiting. <a href="pages/log-mileage.html">Log some miles</a> to get underway.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Oregon Trail DLE</span>
+    <span>Your journey is saved privately in this browser.</span>
+  </footer>
+</body>
+</html>
