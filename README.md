@@ -1,6 +1,10 @@
 ﻿# Oregon Trail DLE
 
-A personal fitness tracker that follows a 2,040-mile Oregon Trail. Log the miles you walk, run, or ride, watch your covered wagon travel from Independence, Missouri, to Oregon City, Oregon, and spend the food-hunting minigame you earn every 5 miles.
+## 🌐 Live site: [dwdike-maker.github.io/oregon-trail-dle](https://dwdike-maker.github.io/oregon-trail-dle/)
+
+> **About this project:** an experiment in using AI to build interesting web use cases. It is a small, dependency-free static site made to see how far AI-assisted development can go with a playful idea: a fitness tracker with a game layer.
+
+A fitness-tracker-meets-game that follows a 2,040-mile Oregon Trail. Log the miles you walk, run, or ride, watch your covered wagon travel from Independence, Missouri, to Oregon City, Oregon, and spend the food-hunting minigame you earn every 5 miles.
 
 It is a plain static website: no server, no database, no account, and nothing to pay for.
 
