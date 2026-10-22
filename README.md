@@ -1,6 +1,6 @@
-﻿# Oregon Trail DLE
+# Oregon Trail DLE
 
-## 🌐 Live site: [dwdike-maker.github.io/oregon-trail-dle](https://dwdike-maker.github.io/oregon-trail-dle/)
+## 🌐 Live site: [dwdyck.github.io/oregon-trail-dle](https://dwdyck.github.io/oregon-trail-dle/)
 
 > **About this project:** an experiment in using AI to build interesting web use cases. It is a small, dependency-free static site made to see how far AI-assisted development can go with a playful idea: a fitness tracker with a game layer.
 
