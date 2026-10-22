@@ -4,7 +4,7 @@ Guidance for AI coding agents. Read this first; it should get you productive in 
 
 ## Project Overview
 
-**What it is:** A fitness tracker with a game layer. The user logs walk/run/ride miles toward a 2,040-mile virtual Oregon Trail (Independence, MO → Oregon City, OR). Every 5 logged miles unlocks a hunting minigame (pick 1 of 3 hiding places, 1-in-3 odds) that earns food. Live at https://dwdike-maker.github.io/oregon-trail-dle/
+**What it is:** A fitness tracker with a game layer. The user logs walk/run/ride miles toward a 2,040-mile virtual Oregon Trail (Independence, MO → Oregon City, OR). Every 5 logged miles unlocks a hunting minigame (pick 1 of 3 hiding places, 1-in-3 odds) that earns food. Live at https://dwdyck.github.io/oregon-trail-dle/
 
 **Primary users:** A single person tracking their own exercise on their own device (phone first).
 
